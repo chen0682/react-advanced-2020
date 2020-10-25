@@ -1,7 +1,10 @@
-import React from 'react';
+import React from 'react'
 
 const ErrorExample = () => {
-  return <h2>useState error example</h2>;
-};
+  let title = 'random title'
+  return (<React.Fragment>
+    <h2>{title}</h2>
+  </React.Fragment>)
+}
 
-export default ErrorExample;
+export default ErrorExample
