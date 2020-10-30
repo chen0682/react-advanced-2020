@@ -11,7 +11,9 @@ const MultipleReturns = () => {
         .then((user) => {
           const { login } = user
           setUser(login)
-          setIsLoading(false)
+          setTimeout(function () {
+            setIsLoading(false)
+          }, 2000)
         })
         .catch(error => console.log(error)))
   }, [])
@@ -21,7 +23,7 @@ const MultipleReturns = () => {
   }
 
   if (isError) {
-    return <h1>Errror...</h1>
+    return <h1>Error...</h1>
   }
 
   return <h2>{user}</h2>
