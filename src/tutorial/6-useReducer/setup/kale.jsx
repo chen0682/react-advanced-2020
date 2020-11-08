@@ -8,13 +8,17 @@ export const ACTIONS = {
 }
 
 function reducer (todos, action) {
+  // console.log('Action: ', action, 'Todos: ', todos)
   switch (action.type) {
     case ACTIONS.ADD_TODO:
+      console.log('action', action, 'action.type: ', action.type)
       return [...todos, newTodo(action.payload.name)]
     case ACTIONS.TOGGLE_TODO:
+      console.log('action', action, 'action.type: ', action.type)
+
       return todos.map(todo => {
         if (todo.id === action.payload.id) {
-          console.log('toggle')
+          // console.log('toggle')
           return { ...todo, completed: !todo.completed }
         }
         return todo
@@ -44,13 +48,13 @@ const Kale = () => {
     <h1>Learning useReducer from Kale</h1>
     <form onSubmit={handleSubmit}>
       <input type='text' value={name} onChange={e => {
-        console.log(e)
+        // console.log(e)
         setName(e.target.value)
       }} />
     </form>
 
     {todos.map(todo => {
-      return <Todo key={todo.id} todo={todo} dispatch={dispatch} />
+      return <Todo key={todo.id} todo={todo} dispatch={dispatch} ACTIONS={ACTIONS} />
     })}
     {/* <div style={{ display: 'inline-flex', alignItems: 'center' }}>
       <button className='btn' onClick={decrement}><h1>-</h1></button>

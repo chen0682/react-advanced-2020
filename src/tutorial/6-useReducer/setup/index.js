@@ -1,19 +1,9 @@
 import React, { useState, useReducer } from 'react'
 import Modal from './Modal'
 import { data } from '../../../data'
+import reducer from './reducer'
 // reducer function
 
-const reducer = (state, action) => {
-  // console.log(state, action)
-  if (action.type === 'TESTING') {
-    return {
-      ...state,
-      people: data,
-      isModalOpen: true,
-      modalContent: 'item added' }
-  }
-  return state
-}
 const defaultState = {
   people: [],
   isModalOpen: false,
@@ -33,17 +23,24 @@ const Index = () => {
       // setShowModal(true)
       // setPeople([...people, { id: new Date().getTime().toString(), name }])
       // setName('')
-      dispatch({ type: 'TESTING' })
+      const newItem = { id: Date.now(), name }
+      dispatch({ type: 'ADD_ITEM', payload: newItem })
+      setName('')
     } else {
       // setShowModal(true)
+      dispatch({ type: 'NO_VALUE' })
     }
+  }
+
+  const closeModal = () => {
+    dispatch({ type: 'CLOSE_MODAL' })
   }
 
   // learning useReducer from Kale
 
   return (
     <>
-      {state.isModalOpen && <Modal modalContent={state.modalContent} />}
+      {state.isModalOpen && <Modal closeModal={closeModal} modalContent={state.modalContent} />}
       <form onSubmit={handleSubmit} className='form'>
         <div>
           <input
@@ -54,8 +51,9 @@ const Index = () => {
         <button type='submit'>Add</button>
       </form>
       {state.people.map((person) => {
-        return <div key={person.id}>
-          <h4>{person.name}</h4>
+        return <div key={person.id} className='item'>
+          <h4>{person.name} {person.id}</h4>
+          <button onClick={() => dispatch({ type: 'REMOVE_ITEM', payload: person.id })}>Remove</button>
         </div>
       })}
     </>

@@ -1,7 +1,7 @@
 import React from 'react'
-import { ACTIONS } from './kale.jsx'
+// import { ACTIONS } from './kale.jsx'
 
-const Todo = ({ todo, dispatch }) => {
+const Todo = ({ todo, dispatch, ACTIONS }) => {
   return (
     <div>
       <span style={{ color: todo.completed ? 'black' : 'red' }}>
